@@ -42,11 +42,19 @@ namespace Банкомат.Bank
             return sum - countMoneyValue * money.ValueMoney;
         }
 
+        private const string DefaultName = "TestData.txt";
+
+        private readonly IData _data;
+
 #region Singleton
+
+       
+
 
         private Bank()
         {
-            Cache = new TXTData("TestData.txt").GetMoney();
+            _data = new TXTData(DefaultName);
+            Cache = _data.GetMoney();
             this.AddMoneyEvent += OnAddMoneyEvent;
             this.RemoveMoneyEvent += OnRemoveMoneyEvent;
         }

@@ -53,7 +53,7 @@ namespace Банкомат
 
                     break;
 
-                case ConsoleKey.D9:
+                case ConsoleKey.D0:
                     exit = true;
 
                     break;
