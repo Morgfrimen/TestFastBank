@@ -16,8 +16,12 @@ namespace Банкомат
                 uint value = Convert.ToUInt32(Console.ReadLine());
                 MoneyBase money = value switch
                 {
-                    20  => new Money20(), 50    => new Money50(), 100 => new Money100(),
-                    500 => new Money500(), 1000 => new Money1000(), _ => null
+                    20  => new Money20(),
+                    50    => new Money50(),
+                    100 => new Money100(),
+                    500 => new Money500(),
+                    1000 => new Money1000(),
+                    _ => null
                 };
 
                 if (money is null)
@@ -32,12 +36,8 @@ namespace Банкомат
                 Bank.Bank.Instance.AddMoney(money, count);
                 Console.WriteLine("Успех!");
             }
-            catch (Exception)
-            {
-                Console.WriteLine("Ошибка!");
-            }
+            catch (Exception) { Console.WriteLine("Ошибка!"); }
         }
-
 
         private static void Command(ConsoleKey key)
         {
@@ -88,10 +88,7 @@ namespace Банкомат
                 Bank.Bank.Instance.RemoveMoney(value);
                 Console.WriteLine("Успех!");
             }
-            catch (Exception)
-            {
-                Console.WriteLine("Ошибка!");
-            }
+            catch (Exception) { Console.WriteLine("Ошибка!"); }
         }
 
         static Program() => Bank.Bank.Instance.NoMoneyEvent += InstanceOnNoMoneyEvent;
