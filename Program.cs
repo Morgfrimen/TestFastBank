@@ -68,6 +68,7 @@ namespace Банкомат
         private static void Main(string[] args)
         {
             Console.WriteLine("Добро пожаловать в банк!");
+
             while (!exit)
             {
                 Console.WriteLine("Что Вы хотите сделать?");
