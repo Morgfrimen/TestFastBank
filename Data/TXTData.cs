@@ -11,7 +11,6 @@ namespace Банкомат.Data
     {
         private readonly string _path;
 
-
         private MoneyBase GetMoneyBase(uint value)
         {
             MoneyBase money = value switch
@@ -25,36 +24,33 @@ namespace Банкомат.Data
         }
 
         internal TXTData(string pathFolder) => _path = pathFolder;
-
         private const string NameFile = "ATM.txt";
-
         internal TXTData() => _path = Path.Combine(Environment.CurrentDirectory, NameFile);
+        private const string Pattern = @"(\d+):(\d+)";
 
 #region Implementation of IData
-
-        private const string pattern = @"(\d+):(\d+)";
 
         /// <inheritdoc />
         public IDictionary<MoneyBase, uint> GetMoney()
         {
-            IDictionary<MoneyBase, uint> CacheData = new Dictionary<MoneyBase, uint>();
+            IDictionary<MoneyBase, uint> cacheData = new Dictionary<MoneyBase, uint>();
 
             using (StreamReader streamReader = new(_path))
             {
                 string text = streamReader.ReadToEnd();
                 MatchCollection mathes = Regex.Matches
-                    (text, pattern, RegexOptions.Compiled & RegexOptions.IgnoreCase);
+                    (text, Pattern, RegexOptions.Compiled & RegexOptions.IgnoreCase);
 
                 foreach (Match mathe in mathes)
                 {
                     string key = mathe.Groups[1].Value;
                     string count = mathe.Groups[2].Value;
                     MoneyBase money = GetMoneyBase(Convert.ToUInt32(key));
-                    CacheData.Add(money, Convert.ToUInt32(count));
+                    cacheData.Add(money, Convert.ToUInt32(count));
                 }
             }
 
-            return CacheData;
+            return cacheData;
         }
 
 #endregion
