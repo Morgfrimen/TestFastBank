@@ -11,22 +11,7 @@ namespace Банкомат.Data
     {
         private readonly string _path;
 
-        private MoneyBase GetMoneyBase(uint value)
-        {
-            MoneyBase money = value switch
-            {
-                20  => new Money20(), 50    => new Money50(), 100 => new Money100(),
-                500 => new Money500(), 1000 => new Money1000(),
-                _   => throw new NotImplementedException("Значение купюры не определенно")
-            };
-
-            return money;
-        }
-
-        internal TXTData(string pathFolder) => _path = pathFolder;
-        private const string NameFile = "ATM.txt";
-        internal TXTData() => _path = Path.Combine(Environment.CurrentDirectory, NameFile);
-        private const string Pattern = @"(\d+):(\d+)";
+#region Implemented
 
 #region Implementation of IData
 
@@ -54,5 +39,26 @@ namespace Банкомат.Data
         }
 
 #endregion
+
+#endregion
+
+        private MoneyBase GetMoneyBase(uint value)
+        {
+            MoneyBase money = value switch
+            {
+                20  => new Money20(), 50    => new Money50(), 100 => new Money100(),
+                500 => new Money500(), 1000 => new Money1000(),
+                _   => throw new NotImplementedException("Значение купюры не определенно")
+            };
+
+            return money;
+        }
+
+        private const string Pattern = @"(\d+):(\d+)";
+        private const string NameFile = "ATM.txt";
+
+        internal TXTData(string pathFolder) => _path = pathFolder;
+        internal TXTData() => _path = Path.Combine(Environment.CurrentDirectory, NameFile);
+
     }
 }

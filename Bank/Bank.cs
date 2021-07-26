@@ -12,7 +12,7 @@ namespace Банкомат.Bank
         private readonly IData _data;
         private MoneyBase[] _money;
 
-        internal IDictionary<MoneyBase, uint> Cache { get; }
+        private IDictionary<MoneyBase, uint> Cache { get; }
 
         internal void AddMoney(MoneyBase money, uint count)
         {
@@ -90,9 +90,9 @@ namespace Банкомат.Bank
 
 #endregion
 
-
+        internal event Action NoMoneyEvent;
         private event Func<MoneyBase, uint, bool> RemoveMoneyEvent;
         private event Action<MoneyBase, uint> AddMoneyEvent;
-        internal event Action NoMoneyEvent;
+
     }
 }
