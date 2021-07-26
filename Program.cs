@@ -17,7 +17,7 @@ namespace Банкомат
                 MoneyBase money = value switch
                 {
                     20  => new Money20(),
-                    50    => new Money50(),
+                    50  => new Money50(),
                     100 => new Money100(),
                     500 => new Money500(),
                     1000 => new Money1000(),
